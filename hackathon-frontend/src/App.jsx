@@ -20,7 +20,7 @@ import ImageCategory from './pages/ImageCategory';
 import { AuthContext } from './context/authContext';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import NavBarL from './components/NavBarL';
-import Profile from './pages/Profile';
+
 
 function App() {
   const {currentUser}=useContext(AuthContext);
