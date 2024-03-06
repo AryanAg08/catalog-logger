@@ -10,6 +10,8 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Home from "./pages/Home";
 import Contact from "./pages/Contact";
+import Footer from "./pages/Footer";
+
 import Profile from "./pages/Profile";
 
 import Navbar from "./components/Navbar";
@@ -27,6 +29,7 @@ function App() {
       <Navbar/>:<NavBarL/>} */}
         <Navbar />
         <Outlet />
+        <Footer />
       </div>
       // </QueryClientProvider>
     );
