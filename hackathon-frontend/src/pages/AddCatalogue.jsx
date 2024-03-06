@@ -1,42 +1,49 @@
-import React, { useState } from "react";
-// import axios from "axios";
-// import { makeRequest } from "../axios";
+import React, { useContext, useState } from "react";
+import { makeRequest } from "../axios";
+import axios from "axios";
+import { AuthContext } from "../context/authContext";
 const AddCatalogue = () => {
   const [file, setFile] = useState(null);
+  const {currentUser}=useContext(AuthContext);
+  const[catalogue,setCatName]=useState({catname:""})
   const [property, setProperty] = useState([
-    { id: 1, name: "", price1:'',price2:'',price3:'',ammenity1:"",ammenity2:"",imgURL:"",location:"",ptype:0},
+    { id: 1,name: "", price:'',desc:"",category:"",imgURL:"",location:""},
   ]);
-// const upload=async()=>{
-//   try{
-//      const formData=new FormData();
-//      formData.append("file",file)
-//      const res=await makeRequest.post("/upload",formData);
-//      return res.data
-//   }catch(err){
-//     console.log(err);
-//   }
-// }
-  const handleInputChange = (index, field, value) => {
+const upload=async()=>{
+  try{
+     const formData=new FormData();
+     formData.append("file",file)
+     const res=await makeRequest.post("/upload",formData);
+     return res.data
+  }catch(err){
+    console.log(err);
+  }
+}
+const token=document.cookie;
+const handleInputChange = (index, field, value) => {
     setProperty((prevProperty) =>
       prevProperty.map((property, i) => (i === index ? { ...property, [field]: value } : property))
     );
   };
-  let imgUrl="";
+  
   const handleImage = async () => {
     if (file) {
-      imgUrl = await upload();
+      const imgUrl = await upload();
       setProperty((prevProperty) =>
         prevProperty.map((prop, index) => (index === property.length - 1 ? { ...prop, imgURL: imgUrl } : prop))
       );
     }
   };
+  const handleCatalogueNameChange = (e) => {
+    setCatName({ ...catalogue, catname: e.target.value });
+  };
   const handleAddProduct =async () => {
-    const newProduct = { id: property.length + 1, name: "", price1:'',price2:'',price3:'',ammenity1:"",ammenity2:"",imgURL:"",location:"",ptype:0 };
+    const newProduct = { id: property.length + 1,name: "", price:'',desc:"",category:"",imgURL:"",location:"" };
     setProperty([...property, newProduct]);
   };
   const handleCategoryChange = (index, value) => {
     setProperty((prevProperty) =>
-      prevProperty.map((property, i) => (i === index ? { ...property, ptype: value } : property))
+      prevProperty.map((property, i) => (i === index ? { ...property, category: value } : property))
     );
   };
 
@@ -45,20 +52,32 @@ const AddCatalogue = () => {
 
 
   const handleSubmit = async () => {
-    // try {
-    //   // Assuming your Express server is running on http://localhost:3001
-    //   const response = await axios.post("http://localhost:8800/api/property/addproperty", property,{
-    //     withCredentials:true,
-    //   });
-    //   console.log("Products added successfully:", response.data);
-    // } catch (error) {
-    //   console.log("Error adding products:", error);
-    // }
+    try {
+        console.log(property)
+        console.log(token)
+      // Assuming your Express server is running on http://localhost:3001
+      const response = await axios.post("https://nsut-backend-0f7548004ed1.herokuapp.com/api/product/addproduct",{... property,cataname:catalogue.catname,token:currentUser.token},{
+        withCredentials:true,
+        headers: {
+            'Authorization': `Bearer ${token}`,
+                  }
+      });
+      console.log("Products added successfully:", response.data);
+    } catch (error) {
+      console.log("Error adding products:", error);
+    }
   };
 
   return (
     <div className="flex flex-col bg-slate-900">
       <h2 className="flex justify-center gradient-text items-center font-bold text-4xl my-8">Add more products</h2>
+       <div className="flex justify-center items-center">
+        <label htmlFor="catname" className="text-[#808080]">Catalogue Name:</label><input type="text"  id={`catname`}
+            value={catalogue.catname}
+            name="catname"
+            onChange={(e)=>handleCatalogueNameChange(e)}
+            className="border-2 border-black rounded-md py-2 text-center"/>
+</div>
       <div  className="flex flex-wrap justify-center">
       {property.map((property, index) => (
         <div key={index} className=" flex flex-col space-x-1 py-4 border-4 border-blue-500 border-solid m-4 p-4 rounded-md bg-slate-900 ">
@@ -75,22 +94,23 @@ const AddCatalogue = () => {
           <input
             type="number"
             id={`propertyPrice${index}`}
-            value={property.price1}
-            onChange={(e) => handleInputChange(index, "price1", e.target.value)}
+            value={property.price}
+            onChange={(e) => handleInputChange(index, "price", e.target.value)}
             className="border-2 border-black rounded-md py-1 text-center"
           />
             <label htmlFor={`propertyPrice${index}`} className="text-[#808080]">Product Description</label>
           <textarea
             id={`propertydesc${index}`}
-            value={property.price3}
-            onChange={(e) => handleInputChange(index, "price3", e.target.value)}
+            value={property.desc}
+            onChange={(e) => handleInputChange(index, "desc", e.target.value)}
             className="border-2 border-black rounded-md py-1 text-center"
           />
           <label htmlFor={`propertyMMEN${index}`} className="text-[#808080]">Product Category</label>
           <select
               id={`propertyCategory${index}`}
-              value={property.ptype}
-              onChange={(e) => handleCategoryChange(index, e.target.value)}
+              value={property.category}
+              name="category"
+              onChange={(e) => handleCategoryChange(index,e.target.value)}
               className="border-2 border-black rounded-md py-1 text-center"
             >
               <option value="">Select Category</option>

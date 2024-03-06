@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 
 import {
   createBrowserRouter,
@@ -11,21 +11,25 @@ import Register from './pages/Register';
 import Home from './pages/Home';
 import Navbar from './components/Navbar';
 import AddCatalogue from './pages/AddCatalogue';
+import ImageCategory from './pages/ImageCategory';
+import { AuthContext } from './context/authContext';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import NavBarL from './components/NavBarL';
+import Profile from './pages/Profile';
 
 function App() {
-  // const {currentUser}=useContext(AuthContext);
-  const currentUser=true;
-  //const queryClient=new QueryClient();
+  const {currentUser}=useContext(AuthContext);
+  const queryClient=new QueryClient();
   const Layout=()=>{
     return (
-      //<QueryClientProvider client={queryClient}>
+      <QueryClientProvider client={queryClient}>
        <div className="">
-       {/* {currentUser?
-      <Navbar/>:<NavBarL/>} */}
-      <Navbar/>
+       {!currentUser?
+      <Navbar/>:<NavBarL/>}
+      {/* <Navbar/> */}
         <Outlet/>
         </div>
-       // </QueryClientProvider>
+      </QueryClientProvider>
     );
 
   };
@@ -44,10 +48,14 @@ function App() {
           path:"/addcat",
           element:<AddCatalogue/>
         },
-        // {
-        //   path:"/profile/:id",
-        //   element:<Profile/>
-        // },
+        {
+          path:"/products/:id",
+          element:<ImageCategory/>
+        },
+        {
+          path:"/profile/:id",
+          element:<Profile/>
+        },
         
        
       ]

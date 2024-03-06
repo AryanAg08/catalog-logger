@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 // import logo from "../components/logo.svg";
 
 import { Link } from "react-router-dom";
@@ -11,8 +11,11 @@ import {
   AiOutlineUserSwitch,
   AiOutlineMail,
 } from "react-icons/ai";
+import { AuthContext } from "../context/authContext";
 
-const Navbar = () => {
+const NavBarL = () => {
+    const {currentUser}=useContext(AuthContext);
+    console.log(currentUser)
   return (
     <nav className="flex flex-row items-center justify-between bg-slate-900 text-white py-4 px-6">
       <div className="logo-container">
@@ -52,29 +55,13 @@ const Navbar = () => {
           to="/Contact"
           spy={true}
           smooth={true}
-          className="hover:bg-slate-800 hover:rounded py-2 px-4 hover:scale-110 ease-in duration-200"
+          className="hover:bg-slate-800  hover:rounded py-2 px-4 hover:scale-110 ease-in duration-200"
         >
           <AiOutlineMail size={20} /> Contact
         </Link>
-
-        <Link
-          to="/register"
-          spy={true}
-          smooth={true}
-          className="hover:bg-teal-800 hover:text-white-500 hover:rounded  transition py-2 px-4 hover:scale-110 ease-in duration-200"
-        >
-          <AiOutlineUserAdd size={20} /> <b>SignUp</b>
-        </Link>
-
-        <Link
-          to="/login"
-          spy={true}
-          smooth={true}
-          className="hover:bg-teal-800  hover:text-white-500 hover:rounded transition py-2 px-4 hover:scale-110 ease-in duration-200"
-        >
-          <AiOutlineLogin size={20} />
-          <b> LogIn</b>
-        </Link>
+        <Link to={`/profile/${currentUser._id}`} spy={true} smooth={true} className="hover:bg-teal-800 hover:text-white-500 hover:rounded flex transition py-2 px-4 hover:scale-110 ease-in duration-200">
+                  <p className="body-bold text-white text-center">{currentUser.name}</p>
+              </Link>
       </div>
       <div className="lg:hidden block bg-slate-900 text-white py-4 px-6 ">
         <ul className="flex text-center text-xl space-x-6"></ul>
@@ -83,4 +70,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default NavBarL;
