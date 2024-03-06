@@ -1,15 +1,3 @@
-// import React from "react";
-
-// const Navbar = () => {
-//   return (
-//     <div>
-//       <h1>Hiiii</h1>
-//     </div>
-//   );
-// };
-
-// export default Navbar;
-
 import React from "react";
 // import logo from "../components/logo.svg";
 
@@ -27,7 +15,7 @@ import {
 const Navbar = () => {
   return (
     <nav className="flex flex-row items-center justify-between bg-slate-900 text-white py-4 px-6">
-      <div className="l">
+      <div className="logo-container">
         <h1>Navbar</h1>
       </div>
       <div className="flex items-center">
