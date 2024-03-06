@@ -23,7 +23,7 @@ const Navbar = () => {
       </div>
       <div className="hidden lg:flex md:flex lg:flex-1 items-center justify-end font-normal space-x-6">
         <Link
-          to="/Home"
+          to="/"
           spy={true}
           smooth={true}
           className="hover:bg-slate-800 hover:rounded py-2 px-4 hover:scale-110 ease-in duration-200"
@@ -48,14 +48,6 @@ const Navbar = () => {
           <AiOutlineUser size={20} /> Profile
         </Link>
 
-        <Link
-          to="/Psych"
-          spy={true}
-          smooth={true}
-          className="hover:bg-slate-800 hover:rounded py-2 px-4 hover:scale-110 ease-in duration-200"
-        >
-          <AiOutlineUserSwitch size={20} /> Psychiatrist
-        </Link>
         <Link
           to="/Contact"
           spy={true}

@@ -16,6 +16,11 @@
     .logo-container2{
       @apply w-[400px] h-auto;
     }
+    .heading {
+      @apply text-center text-3xl font-bold text-gray-800;
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.8), 0 0 20px rgba(255, 255, 255, 0.8), 0 0 30px rgba(255, 255, 255, 0.8);
+  }
+  
     .h1-semibold {
       @apply text-[36px] font-semibold leading-[140%] tracking-tighter;
     }

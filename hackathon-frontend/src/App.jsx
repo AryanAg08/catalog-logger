@@ -10,6 +10,7 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import Home from './pages/Home';
 import Navbar from './components/Navbar';
+import AddCatalogue from './pages/AddCatalogue';
 
 function App() {
   // const {currentUser}=useContext(AuthContext);
@@ -38,6 +39,10 @@ function App() {
         {
           path:"/",
           element:<Home/>
+        },
+        {
+          path:"/addcat",
+          element:<AddCatalogue/>
         },
         // {
         //   path:"/profile/:id",
