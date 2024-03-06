@@ -58,7 +58,7 @@ const handleInputChange = (index, field, value) => {
         console.log(property)
         console.log(token)
       // Assuming your Express server is running on http://localhost:3001
-      const response = await axios.post("https://nsut-backend-0f7548004ed1.herokuapp.com/api/product/addproduct",{... property,cataname:catalogue.catname,token:currentUser.token},{
+      const response = await axios.post("https://nsut-backend-0f7548004ed1.herokuapp.com/api/product/addproduct",{property,cataname:catalogue.catname,token:currentUser.token},{
         withCredentials:true,
         headers: {
             'Authorization': `Bearer ${token}`,

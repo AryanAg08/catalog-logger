@@ -21,7 +21,7 @@ const CatalogueList = ({product}) => {
   return (
   
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-8 p-8">
              
                 <motion.div
                   key={product.product_id}
@@ -38,9 +38,9 @@ const CatalogueList = ({product}) => {
                   <h3 className="text-xl font-semibold mb-2">{product.product_name}</h3>
                   <div className="flex items-center mb-2">
                     <div
-                      className={`bg-green-500 w-full h-6 mr-2 rounded-md`}
+                      className={`w-full h-6 mr-2 rounded-md`}
                     >
-                      <span className="text-white font-bold">{product.product_location}</span>
+                      <span className="text-green-500">{product.product_location}</span>
                     </div>
                     <motion.div
                       className="bg-green-500 w-full h-6 rounded-md"
