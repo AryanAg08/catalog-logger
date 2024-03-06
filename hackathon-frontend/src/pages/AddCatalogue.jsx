@@ -14,7 +14,15 @@ const upload=async()=>{
      const formData=new FormData();
      formData.append("file",file)
      const res=await makeRequest.post("/upload",formData);
+     console.log(res.data);
      return res.data
+     setProperty(prevState => [
+      ...prevState, // Keep existing properties
+      { 
+        imgURL: `https://nsut-backend-0f7548004ed1.herokuapp.com/link/${res.data}`,
+       // location: res.data.location
+      }
+    ]);
   }catch(err){
     console.log(err);
   }
@@ -30,7 +38,7 @@ const handleInputChange = (index, field, value) => {
     if (file) {
       const imgUrl = await upload();
       setProperty((prevProperty) =>
-        prevProperty.map((prop, index) => (index === property.length - 1 ? { ...prop, imgURL: imgUrl } : prop))
+        prevProperty.map((prop, index) => (index === property.length - 1 ? { ...prop, imgURL: `https://nsut-backend-0f7548004ed1.herokuapp.com/link/${imgUrl}` } : prop))
       );
     }
   };
@@ -56,7 +64,7 @@ const handleInputChange = (index, field, value) => {
         console.log(property)
         console.log(token)
       // Assuming your Express server is running on http://localhost:3001
-      const response = await axios.post("https://nsut-backend-0f7548004ed1.herokuapp.com/api/product/addproduct",{... property,cataname:catalogue.catname,token:currentUser.token},{
+      const response = await axios.post("https://nsut-backend-0f7548004ed1.herokuapp.com/api/product/addproduct",{property,cataname:catalogue.catname,token:currentUser.token},{
         withCredentials:true,
         headers: {
             'Authorization': `Bearer ${token}`,
