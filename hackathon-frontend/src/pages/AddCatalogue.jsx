@@ -13,9 +13,16 @@ const upload=async()=>{
   try{
      const formData=new FormData();
      formData.append("file",file)
-     const res=await axios.post("https://nsut-backend-0f7548004ed1.herokuapp.com/api/upload",formData);
-     console.log(res)
+     const res=await makeRequest.post("/upload",formData);
+     console.log(res.data);
      return res.data
+     setProperty(prevState => [
+      ...prevState, // Keep existing properties
+      { 
+        imgURL: `https://nsut-backend-0f7548004ed1.herokuapp.com/link/${res.data}`,
+       // location: res.data.location
+      }
+    ]);
   }catch(err){
     console.log(err);
   }
@@ -32,7 +39,7 @@ const handleInputChange = (index, field, value) => {
        imgUrl = await upload();
       console.log(imgUrl)
       setProperty((prevProperty) =>
-        prevProperty.map((property, index) => (index === property.length - 1 ? { ...property, imgURL: imgUrl } : property))
+        prevProperty.map((prop, index) => (index === property.length - 1 ? { ...prop, imgURL: `https://nsut-backend-0f7548004ed1.herokuapp.com/link/${imgUrl}` } : prop))
       );
     }
   };
