@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react'
+import { useContext, useState } from "react";
 
 import {
   createBrowserRouter,
@@ -12,27 +12,26 @@ import Home from "./pages/Home";
 import Contact from "./pages/Contact";
 import Footer from "./pages/Footer";
 
-import Profile from "./pages/Profile";
+// import Profile from "./pages/Profile";
 
 import Navbar from "./components/Navbar";
 import AddCatalogue from "./pages/AddCatalogue";
-import ImageCategory from './pages/ImageCategory';
-import { AuthContext } from './context/authContext';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import NavBarL from './components/NavBarL';
-import Profile from './pages/Profile';
+import ImageCategory from "./pages/ImageCategory";
+import { AuthContext } from "./context/authContext";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import NavBarL from "./components/NavBarL";
+import Profile from "./pages/Profile";
 
 function App() {
-  const {currentUser}=useContext(AuthContext);
-  const queryClient=new QueryClient();
-  const Layout=()=>{
+  const { currentUser } = useContext(AuthContext);
+  const queryClient = new QueryClient();
+  const Layout = () => {
     return (
       <QueryClientProvider client={queryClient}>
-       <div className="">
-       {!currentUser?
-      <Navbar/>:<NavBarL/>}
-      {/* <Navbar/> */}
-        <Outlet/>
+        <div className="">
+          {!currentUser ? <Navbar /> : <NavBarL />}
+          {/* <Navbar/> */}
+          <Outlet />
         </div>
       </QueryClientProvider>
     );
@@ -52,16 +51,14 @@ function App() {
           element: <AddCatalogue />,
         },
         {
-          path:"/products/:id",
-          element:<ImageCategory/>
+          path: "/products/:id",
+          element: <ImageCategory />,
         },
         {
-          path:"/profile/:id",
-          element:<Profile/>
+          path: "/profile/:id",
+          element: <Profile />,
         },
-        
-       
-      ]
+      ],
     },
     {
       path: "/login",
