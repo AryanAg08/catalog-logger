@@ -6,11 +6,14 @@ import {
   Outlet,
   Navigate,
 } from "react-router-dom";
-import Login from './pages/Login';
-import Register from './pages/Register';
-import Home from './pages/Home';
-import Navbar from './components/Navbar';
-import AddCatalogue from './pages/AddCatalogue';
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+import Home from "./pages/Home";
+import Contact from "./pages/Contact";
+import Profile from "./pages/Profile";
+
+import Navbar from "./components/Navbar";
+import AddCatalogue from "./pages/AddCatalogue";
 import ImageCategory from './pages/ImageCategory';
 import { AuthContext } from './context/authContext';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
@@ -31,22 +34,20 @@ function App() {
         </div>
       </QueryClientProvider>
     );
-
   };
 
   const router = createBrowserRouter([
     {
-      path:"/",
-      element:
-      <Layout/>,
-      children:[
+      path: "/",
+      element: <Layout />,
+      children: [
         {
-          path:"/",
-          element:<Home/>
+          path: "/",
+          element: <Home />,
         },
         {
-          path:"/addcat",
-          element:<AddCatalogue/>
+          path: "/addcat",
+          element: <AddCatalogue />,
         },
         {
           path:"/products/:id",
@@ -62,19 +63,28 @@ function App() {
     },
     {
       path: "/login",
-      element: <Login/>,
+      element: <Login />,
     },
     {
       path: "/register",
-      element: <Register/>,
+      element: <Register />,
     },
-    
-   
+
+    {
+      path: "/contact",
+      element: <Contact />,
+    },
+    {
+      path: "/profile",
+      element: <Profile />,
+    },
   ]);
- 
-    return <div >
-       <RouterProvider router={router} />
-    </div>;
+
+  return (
+    <div>
+      <RouterProvider router={router} />
+    </div>
+  );
 }
 
-export default App
+export default App;
