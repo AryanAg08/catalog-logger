@@ -10,6 +10,8 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Home from "./pages/Home";
 import Contact from "./pages/Contact";
+import Profile from "./pages/Profile";
+
 import Navbar from "./components/Navbar";
 import AddCatalogue from "./pages/AddCatalogue";
 
@@ -61,6 +63,10 @@ function App() {
     {
       path: "/contact",
       element: <Contact />,
+    },
+    {
+      path: "/profile",
+      element: <Profile />,
     },
   ]);
 
