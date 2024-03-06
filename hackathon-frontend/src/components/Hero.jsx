@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 const Hero = () => {
   return (
-    <div className="bg-cover bg-center h-screen flex items-center mb-10" style={{ backgroundImage: "url('/assets/back.png')" }}>
+    <div className="bg-cover bg-center h-[75vh] flex items-center mb-10" style={{ backgroundImage: "url('/assets/back.png')" }}>
       <div className="container mx-auto flex justify-end">
         <div className="max-w-md bg-gray-200 p-8 rounded-lg shadow-lg">
           <h2 className="text-3xl font-semibold mb-4">Make money selling on our website</h2>

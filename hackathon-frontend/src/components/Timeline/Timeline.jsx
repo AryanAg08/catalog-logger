@@ -1,4 +1,4 @@
-import "./time.css"
+
 import React,{useState} from 'react';
 import { motion } from 'framer-motion';
 import { VerticalTimeline, VerticalTimelineElement } from 'react-vertical-timeline-component';
@@ -33,7 +33,7 @@ const TimelineWithAnimations = () => {
   };
 
   return (
-    <div>
+    <div className="bg-[#f8f6f3] rounded-lg">
     <Heading text="HOW TO INCREASE YOUR CATSCORE"/>
     <div className="flex flex-wrap place-content-center px-14 py-14 text-slate-900 bg-transparent">
       <VerticalTimeline lineColor="#374151">
