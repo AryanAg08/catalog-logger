@@ -21,6 +21,7 @@ import { AuthContext } from "./context/authContext";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import NavBarL from "./components/NavBarL";
 import Profile from "./pages/Profile";
+import PrintCatalogue from "./pages/PrintCatalogue";
 
 function App() {
   const { currentUser } = useContext(AuthContext);
@@ -77,6 +78,11 @@ function App() {
       path: "/profile",
       element: <Profile />,
     },
+    {
+      path:"/catalogue",
+      element:<PrintCatalogue/>,
+      props:true
+    }
   ]);
 
   return (

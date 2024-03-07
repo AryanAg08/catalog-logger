@@ -2,10 +2,13 @@ import React, { useContext, useState } from "react";
 import { makeRequest } from "../axios";
 import axios from "axios";
 import { AuthContext } from "../context/authContext";
+import { useNavigate } from "react-router-dom";
 const AddCatalogue = () => {
   const [file, setFile] = useState(null);
   const {currentUser}=useContext(AuthContext);
   const[catalogue,setCatName]=useState({catname:""})
+  const navigate=useNavigate();
+  const [catalogueData, setCatalogueData] = useState({});
   const [property, setProperty] = useState([
     { id: 1,name: "", price:'',desc:"",category:"",imgURL:"",location:""},
   ]);
@@ -44,8 +47,9 @@ const handleInputChange = (index, field, value) => {
     }
   };
   const handleCatalogueNameChange = (e) => {
-    setCatName({ ...catalogue, catname: e.target.value });
+    setCatalogueData({ ...catalogueData, catname: e.target.value });
   };
+
   const handleAddProduct =async () => {
     const newProduct = { id: property.length + 1,name: "", price:'',desc:"",category:"",imgURL:"",location:"" };
     setProperty([...property, newProduct]);
@@ -65,13 +69,15 @@ const handleInputChange = (index, field, value) => {
         console.log(property)
         console.log(token)
       // Assuming your Express server is running on http://localhost:3001
-      const response = await axios.post("https://nsut-backend-0f7548004ed1.herokuapp.com/api/product/addproduct",{property,cataname:catalogue.catname,token:currentUser.token},{
+      const response = await axios.post("https://nsut-backend-0f7548004ed1.herokuapp.com/api/product/addproduct",{property,cataname:catalogueData.catname,token:currentUser.token},{
         withCredentials:true,
         headers: {
             'Authorization': `Bearer ${token}`,
                   }
       });
+      setCatalogueData(response.data);
       console.log("Products added successfully:", response.data);
+      navigate("/catalogue", { state: { catalogueData: response.data } })
     } catch (error) {
       console.log("Error adding products:", error);
     }
