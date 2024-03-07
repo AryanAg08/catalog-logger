@@ -41,7 +41,6 @@ const ProductPDF = ({ product }) => (
         <Text style={styles.productDetails}>{product.category}</Text>
         <Text style={styles.productDetails}>{product.price}</Text>
         <Text style={styles.productDetails}>{product.image}</Text>
-        {/* <Image src={product.image} style={{ width: 200, height: 200 }} /> */}
         <Text style={styles.productDescription}>{product.description}</Text>
     </View>
 );
