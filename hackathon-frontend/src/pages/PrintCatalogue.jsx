@@ -40,7 +40,8 @@ const ProductPDF = ({ product }) => (
         <Text style={styles.productDetails}>{product.location}</Text>
         <Text style={styles.productDetails}>{product.category}</Text>
         <Text style={styles.productDetails}>{product.price}</Text>
-        <Image src={product.image} style={{ width: 200, height: 200 }} />
+        <Text style={styles.productDetails}>{product.image}</Text>
+        {/* <Image src={product.image} style={{ width: 200, height: 200 }} /> */}
         <Text style={styles.productDescription}>{product.description}</Text>
     </View>
 );
@@ -63,18 +64,18 @@ const PrintCatalogue = () => {
     const [catalogueData, setCatalogueData] = useState(null);
     const {currentUser}=useContext(AuthContext);
     const tok={token:currentUser.token}
-    useEffect(() => {
-        const fetchCatalogueData = async () => {
-            try {
-                const response = await makeRequest.get('/product',{params:tok});
-                setCatalogueData(response.data);
-            } catch (error) {
-                console.error('Error fetching catalogue data:', error);
-            }
-        };
+    // useEffect(() => {
+    //     const fetchCatalogueData = async () => {
+    //         try {
+    //             const response = await makeRequest.get('/product',{params:tok});
+    //             setCatalogueData(response.data);
+    //         } catch (error) {
+    //             console.error('Error fetching catalogue data:', error);
+    //         }
+    //     };
 
-        fetchCatalogueData();
-    }, []);
+    //     fetchCatalogueData();
+    // }, []);
   console.log(catalogueData)
     const catalogue = {
         name: 'Catalogue 1',
@@ -116,18 +117,18 @@ const PrintCatalogue = () => {
                 </div>
                 </div>
                 <div className="flex-1 flex flex-wrap justify-center overflow-y-auto py-4 px-8">
-                {catalogueData.map((product, index) => (
+                {catalogue.products.map((product, index) => (
                     <div key={index} className="bg-white rounded-md p-4 shadow-md m-4 max-w-sm">
-                        <img src={product.product_imgurl} alt=""className="w-full h-48 object-cover mb-4" />
-                        <div className="text-lg font-semibold mb-2">{product.product_name}</div>
-                        <div className="text-gray-600 mb-2">{product.product_location}</div>
-                        <div className="text-gray-600 mb-2">{product.product_category}</div>
-                        <div className="text-green-500 font-semibold mb-2">{product.product_price}</div>
-                        <p className="text-gray-800">{product.product_quantity}</p>
+                        <img src={product.image} alt=""className="w-full h-48 object-cover mb-4" />
+                        <div className="text-lg font-semibold mb-2">{product.name}</div>
+                        <div className="text-gray-600 mb-2">{product.location}</div>
+                        <div className="text-gray-600 mb-2">{product.category}</div>
+                        <div className="text-green-500 font-semibold mb-2">{product.price}</div>
+                        <p className="text-gray-800">{product.description}</p>
                     </div>
                 ))}
             </div>
-                <PDFDownloadLink document={<CataloguePDF catalogue={catalogueData} />} fileName={`${catalogueData.Catalog_name}.pdf`}>
+                <PDFDownloadLink document={<CataloguePDF catalogue={catalogue} />} fileName={`${catalogue.name}.pdf`}>
                     {({ blob, url, loading, error }) => (loading ? 'Loading document...' : 'Download PDF')}
                 </PDFDownloadLink>
             </div>

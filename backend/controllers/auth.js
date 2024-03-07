@@ -16,7 +16,7 @@ const jwt = require("jsonwebtoken")
         const salt=bcrypt.genSaltSync(10);
   const hashPassword=bcrypt.hashSync(req.body.password,salt)
    // insert data
-   await R1.findOneAndUpdate({
+  const RRRR = await R1.findOneAndUpdate({
     username,
     email: req.body.email
    },{
@@ -27,8 +27,10 @@ const jwt = require("jsonwebtoken")
    },{
     new: true,
     upsert: true,
-   }).then(() => {
-    return res.status(200).json("User has been created!");
+   }).then((data) => {
+    console.log(data);
+    return res.status(200).json(data);
+
    })
 
  
@@ -38,7 +40,7 @@ const jwt = require("jsonwebtoken")
 async function login (req,res) {
   const username = req.body.username;
 
-  const RR1 = await R1.find({
+  const RR1 = await R1.findOne({
     username
    })
 
@@ -47,17 +49,24 @@ async function login (req,res) {
    }
    else {
     console.log("user is available");
-    for (qq of RR1) {
+    console.log(await RR1);
+    // for (qq of RR1) {
          
-      const checkPassword=bcrypt.compareSync(req.body.password,qq.password)
+      const checkPassword=bcrypt.compareSync(req.body.password,RR1.password)
       if(!checkPassword) return res.status(400).json("Wrong password or username!")
-      const token=jwt.sign({id:qq._id},"secretkey")
-    const{password,...others}=qq;
+      console.log(RR1._id);
+      const token=jwt.sign({id:RR1._id},"secretkey")
+      console.log(token);
+      const Total = {
+        RR1,
+        token: `${token}`
+      }
+    const{password,...others}= RR1;
     res.cookie("accessToken",token,{
-      httpOnly:true,
-    }).status(200).json(others);
+      HttpOnly:true,  
+    }).status(200).json(Total);
     }
-    }
+    // }
  
 }
 async function logout (req,res) {
