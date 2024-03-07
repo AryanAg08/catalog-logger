@@ -76,6 +76,27 @@ const handleInputChange = (index, field, value) => {
     }
   };
 
+  const handleFileUpload = (e) => {
+    setFile(e.target.files[0]);
+  };
+
+  // Function to handle CSV file upload
+  const handleCSVUpload = async () => {
+      try{
+        const formData=new FormData();
+         formData.append("file",file)
+         const res=await makeRequest.post("/csv",formData);
+         console.log(res.data);
+         alert(`Your CatlogScore is ${res.data}`);
+        //  return res.data;
+
+      }catch(err){
+        console.log(err);
+      }
+  
+    console.log("CSV file uploaded:", file);
+  };
+
   return (
     <div className="flex flex-col bg-slate-900">
       <h2 className="flex justify-center gradient-text items-center font-bold text-4xl my-8">Add more products</h2>
@@ -152,6 +173,10 @@ const handleInputChange = (index, field, value) => {
    <div className="flex mx-5 justify-center mt-5 space-x-1.5 mb-12">
       <button onClick={handleAddProduct} className=" bg-blue-500 outline-none p-2 text-white rounded-md">Add More Products</button>
       <button onClick={handleSubmit} className="top-full right-0 bg-green-500 text-white py-2 px-4 rounded-md">Save Catalogue</button>
+      </div>
+      <div className="flex justify-center items-center">
+        <input type="file" accept=".csv" onChange={handleFileUpload} />
+        <button onClick={handleCSVUpload} className="top-full right-0 bg-green-500 text-white py-2 px-4 rounded-md">Upload CSV</button>
       </div>
 
     </div>
