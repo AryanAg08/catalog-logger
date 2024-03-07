@@ -52,7 +52,7 @@ const Navbar = () => {
           to="/Contact"
           spy={true}
           smooth={true}
-          className="hover:bg-slate-800 hover:rounded py-2 px-4 hover:scale-110 ease-in duration-200"
+          className="hover:bg-slate-800 hover:bg-slate-800  hover:rounded py-2 px-4 hover:scale-110 ease-in duration-200"
         >
           <AiOutlineMail size={20} /> Contact
         </Link>
