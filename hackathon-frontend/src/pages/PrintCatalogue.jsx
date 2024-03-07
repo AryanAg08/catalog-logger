@@ -96,7 +96,6 @@ const PrintCatalogue = () => {
                 image: backImage,
                 description: 'Description of Product B',
             },
-            // Add more products as needed
         ]
     };
 
