@@ -1,0 +1,59 @@
+footer {
+    background-color: white; /* White background color for the footer */
+    color: black; /* Text color */
+    padding: 20px; /* Padding around the content */
+    display: flex; /* Arrange items in a row */
+    justify-content: space-around; /* Evenly space items horizontally */
+}
+
+footer div {
+    flex: 1; /* Each section takes up equal space */
+}
+
+footer h6 {
+    font-size: 16px; /* Font size for section headings */
+}
+
+footer ul {
+    list-style-type: none; /* Remove bullet points from lists */
+    padding: 0; /* Remove default padding */
+}
+
+footer ul li {
+    margin-bottom: 10px; /* Add space between list items */
+    position: relative; /* Add position relative for dropdown */
+}
+
+footer a {
+    color: black; /* Text color for links */
+    text-decoration: none; /* Remove underline from links */
+    transition: color 0.3s; /* Smooth transition for color change */
+}
+
+footer a:hover {
+    color: #666; /* Change color on hover */
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: white; /* White background for dropdown */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add shadow for dropdown */
+    z-index: 1;
+}
+
+footer ul li:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown-content a {
+    color: black; /* Black color for dropdown links */
+    padding: 10px;
+    display: block;
+    text-decoration: none;
+    transition: background-color 0.3s; /* Smooth transition for background color change */
+}
+
+.dropdown-content a:hover {
+    background-color: #f5f5f5; /* Change background color on hover */
+}

@@ -10,7 +10,7 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Home from "./pages/Home";
 import Contact from "./pages/Contact";
-import Footer from "./pages/Footer";
+
 
 // import Profile from "./pages/Profile";
 
@@ -22,6 +22,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import NavBarL from "./components/NavBarL";
 import Profile from "./pages/Profile";
 import PrintCatalogue from "./pages/PrintCatalogue";
+import AboutPage from "./components/aboutus/aboutus";
 
 function App() {
   const { currentUser } = useContext(AuthContext);
@@ -58,6 +59,10 @@ function App() {
         {
           path: "/profile/:id",
           element: <Profile />,
+        },
+        {
+          path: "/About",
+          element: <AboutPage />,
         },
       ],
     },

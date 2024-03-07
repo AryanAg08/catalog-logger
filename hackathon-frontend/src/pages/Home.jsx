@@ -2,7 +2,9 @@ import React from "react";
 import TimelineWithAnimations from "../components/Timeline/Timeline";
 import Hero from "../components/Hero";
 import ExploreCard from "../components/ExploreCard";
-import Footer from "./Footer";
+import Footer from "../components/footer/footer";
+
+
 
 const Home = () => {
   return (
